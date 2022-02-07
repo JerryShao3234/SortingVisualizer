@@ -134,34 +134,6 @@ public class VisualFrame extends JFrame {
 
         setExtendedState(JFrame.MAXIMIZED_BOTH );
 
-        /*
-        addComponentListener(new ComponentListener() {
-
-            @Override
-            public void componentResized(ComponentEvent e) {
-                // Reset the sizeModifier
-                // 90% of the windows height, divided by the size of the sorted array.
-                sizeModifier = (int) ((getHeight()*0.9)/(squarePanels.length));
-            }
-
-            @Override
-            public void componentMoved(ComponentEvent e) {
-                // Do nothing
-            }
-
-            @Override
-            public void componentShown(ComponentEvent e) {
-                // Do nothing
-            }
-
-            @Override
-            public void componentHidden(ComponentEvent e) {
-                // Do nothing
-            }
-
-        });
-        */
-
         setVisible(true);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
