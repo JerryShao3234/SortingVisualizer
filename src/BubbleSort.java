@@ -10,7 +10,7 @@ public class BubbleSort implements Runnable{
         this.fast = fast;
     }
 
-    public void run() {
+    public synchronized void run() {
         if (fast) {
             sortFast();
         } else {
@@ -19,7 +19,7 @@ public class BubbleSort implements Runnable{
         SortingVisualizer.isSorting=false;
     }
 
-    public void sortFast() {
+    public synchronized void sortFast() {
         int temp = 0;
         boolean swapped = false;
         for(int i = 0; i<toBeSorted.length-1; i++){
@@ -32,7 +32,9 @@ public class BubbleSort implements Runnable{
                     swapped = true;
                 }
             }
-            frame.reDrawArray(toBeSorted);
+            if(!SortingVisualizer.hasPaused) {
+                frame.reDrawArray(toBeSorted);
+            }
             try {
                 Thread.sleep(SortingVisualizer.sleep);
             } catch (InterruptedException e) {
@@ -42,7 +44,8 @@ public class BubbleSort implements Runnable{
         }
     }
 
-    public void sortSlow() {
+    public synchronized void sortSlow() {
+
         int temp = 0;
         boolean swapped = false;
         for(int i = 0; i<toBeSorted.length-1; i++){
@@ -54,7 +57,10 @@ public class BubbleSort implements Runnable{
                     toBeSorted[j]= temp;
                     swapped = true;
                 }
-                frame.reDrawArray(toBeSorted, j, j+1);
+                //if(!SortingVisualizer.isPausing) {
+                    frame.reDrawArray(toBeSorted, j, j + 1);
+                //}
+
                 try {
                     Thread.sleep(SortingVisualizer.sleep);
                 } catch (InterruptedException e) {

@@ -7,23 +7,26 @@ public class SortingVisualizer {
 
     public static VisualFrame frame;
     public static Integer[] toBeSorted;
-    public static boolean isSorting = false; //global now!
+    public static volatile boolean isSorting = false; //global now!
+    public static volatile boolean hasPaused = false; //global now!
+    public static volatile boolean isDrawing = false; //global now!
+    public static volatile boolean isPausing = false; //global now!
     public static int sortDataCount = 100;
     public static int sleep = 20;
     public static int blockWidth;
     // Stepped depicts whether the values are incremental or random. True is incremental.
     public static boolean stepped = false;
 
-    public static void main(String[] args) {
+    public synchronized static void main(String[] args) {
         frame = new VisualFrame();
         resetArray();
         frame.setLocationRelativeTo(null);
     }
 
-    public static void resetArray(){
+    public synchronized static void resetArray(){
         // If we are currently in a sorting method, then isSorting should be true
         // We do not want to reinitialize/reset the array mid sort.
-        if (isSorting) return;
+        if (isSorting || hasPaused) return;
         toBeSorted = new Integer[sortDataCount];
         blockWidth = (int) Math.max(Math.floor(500/sortDataCount), 1);
         for(int i = 0; i<toBeSorted.length; i++){
@@ -45,14 +48,16 @@ public class SortingVisualizer {
         frame.preDrawArray(toBeSorted);
     }
 
-    public static void startSort(String type){
+    public synchronized static void startSort(String type){
+
+        if(hasPaused) hasPaused = false;
 
         if (sortingThread == null || !isSorting){
 
            // resetArray();
 
             isSorting = true;
-
+            hasPaused = false;
 
             switch(type){
                 case "Bubble":
@@ -67,15 +72,25 @@ public class SortingVisualizer {
 
     }
 
-    public static void pauseSort(String type) {
+    public synchronized static void pauseSort() {
         isSorting = false;
+        hasPaused = true;
+        isPausing = true;
+
         try {
+
+            if(isDrawing) {isPausing = false; pauseSort();}
             sortingThread.stop();
 
         }
         catch (Exception e) {
             System.out.println("Failed to pause :|");
         }
+        finally {
+            isPausing = false;
+        }
+
+        ///isPausing = true;
     }
 
 

@@ -46,11 +46,11 @@ public class VisualFrame extends JFrame {
     private GridBagConstraints c;
     private JCheckBox stepped;
 
-    public static void main(String[] args){
+    public  synchronized static void main(String[] args){
         new VisualFrame();
     }
 
-    public VisualFrame(){
+    public  VisualFrame(){
         super("Sorting Visualizer");
 
         start = new JButton("Start");
@@ -82,7 +82,8 @@ public class VisualFrame extends JFrame {
 
         pause.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                SortingVisualizer.pauseSort((String) selection.getSelectedItem());
+                System.out.println("pause");
+                SortingVisualizer.pauseSort();
             }
         });
 
@@ -141,7 +142,7 @@ public class VisualFrame extends JFrame {
     }
 
     // preDrawArray reinitializes the array of panels that represent the values. They are set based on the size of the window.
-    public void preDrawArray(Integer[] squares){
+    public synchronized void preDrawArray(Integer[] squares){
         squarePanels = new JPanel[SortingVisualizer.sortDataCount];
         arrayWrapper.removeAll();
         // 90% of the windows height, divided by the size of the sorted array.
@@ -156,20 +157,26 @@ public class VisualFrame extends JFrame {
         validate();
     }
 
-    public void reDrawArray(Integer[] x){
+    public synchronized void reDrawArray(Integer[] x){
+        if(SortingVisualizer.isPausing) {
+            reDrawArray(x);
+        }
         reDrawArray(x, -1);
     }
 
-    public void reDrawArray(Integer[] x, int y){
+    public synchronized void reDrawArray(Integer[] x, int y){
         reDrawArray(x, y, -1);
     }
 
-    public void reDrawArray(Integer[] x, int y, int z){
+    public synchronized void reDrawArray(Integer[] x, int y, int z){
         reDrawArray(x, y, z, -1);
     }
 
     // reDrawArray does similar to preDrawArray except it does not reinitialize the panel.
-    public void reDrawArray(Integer[] squares, int working, int comparing, int reading){
+    public synchronized void reDrawArray(Integer[] squares, int working, int comparing, int reading){
+
+        SortingVisualizer.isDrawing = true;
+
         arrayWrapper.removeAll();
         for(int i = 0; i<squarePanels.length; i++){
             squarePanels[i] = new JPanel();
@@ -187,6 +194,8 @@ public class VisualFrame extends JFrame {
         }
         repaint();
         validate();
+
+        SortingVisualizer.isDrawing = false;
     }
 
 }
