@@ -63,7 +63,7 @@ public class VisualFrame extends JFrame {
         size = new JSlider(MIN_SIZE, MAX_SIZE, DEFAULT_SIZE);
         speedVal = new JLabel("Speed: 20 ms");
         sizeVal = new JLabel("Size: 100 values");
-        stepped = new JCheckBox("Stepped Values");
+        stepped = new JCheckBox("Incremental Values");
         c = new GridBagConstraints();
 
         for(String s : Sorts) selection.addItem(s);
@@ -111,7 +111,7 @@ public class VisualFrame extends JFrame {
         size.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent arg0) {
                 sizeVal.setText(("Size: " + Integer.toString(size.getValue()) + " values"));
-                validate();
+                //validate();
                 SortingVisualizer.sortDataCount = size.getValue();
                 SortingVisualizer.resetArray();
             }
@@ -149,7 +149,7 @@ public class VisualFrame extends JFrame {
         for(int i = 0; i<SortingVisualizer.sortDataCount; i++){
             squarePanels[i] = new JPanel();
             squarePanels[i].setPreferredSize(new Dimension(SortingVisualizer.blockWidth, squares[i]*sizeModifier));
-            squarePanels[i].setBackground(Color.blue);
+            squarePanels[i].setBackground(Color.BLUE);
             arrayWrapper.add(squarePanels[i], c);
         }
         repaint();

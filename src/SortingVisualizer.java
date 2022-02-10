@@ -7,7 +7,7 @@ public class SortingVisualizer {
 
     public static VisualFrame frame;
     public static Integer[] toBeSorted;
-    public static boolean isSorting = false;
+    public static boolean isSorting = false; //global now!
     public static int sortDataCount = 100;
     public static int sleep = 20;
     public static int blockWidth;
