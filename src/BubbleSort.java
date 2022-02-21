@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class BubbleSort implements Runnable{
 
     private Integer[] toBeSorted;
@@ -15,6 +17,8 @@ public class BubbleSort implements Runnable{
             sortFast();
         } else {
             sortSlow();
+            //Arrays.fill(toBeSorted, 0);
+            frame.reDrawArray(toBeSorted, -1, -1, -1);
         }
         SortingVisualizer.isSorting=false;
     }
