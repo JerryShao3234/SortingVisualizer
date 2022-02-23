@@ -1,3 +1,2 @@
-- add pause support
 - add more algorithms
 - add switching while sorting capability
