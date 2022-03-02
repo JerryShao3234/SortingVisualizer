@@ -138,6 +138,9 @@ public class VisualFrame extends JFrame {
         sizeip.setColumns(3);
         sizeip.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if(SortingVisualizer.sortDataCount == Integer.parseInt(sizeip.getText())) {
+                    return;
+                }
                 SortingVisualizer.sortDataCount = Integer.parseInt(sizeip.getText());
                 SortingVisualizer.resetArray();
                 size.setValue(Integer.parseInt(sizeip.getText()));
@@ -156,7 +159,6 @@ public class VisualFrame extends JFrame {
 
         wrapper.add(buttonWrapper, BorderLayout.SOUTH);
         wrapper.add(arrayWrapper);
-
         add(wrapper);
 
         setExtendedState(JFrame.MAXIMIZED_BOTH );
