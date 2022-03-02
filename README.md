@@ -10,5 +10,6 @@ Demo of my version:
 Summary of Current Modifications:  
   - Implemented Pausing/Resuming functionality to better visualize temporary array
   - Implemented dual text/slider support for easier size input (but not for speed, since that isn't as important)
-  - Improved synchronization for GUI and main thread
-  - Enhanced code quality with standard OOP principles (exception handling, multithreading performance, file layout, documentation, etc.)
+  - Implemented runtime modification support for speed
+  - Improved synchronization between GUI sub-thread and main thread
+  - Enhanced code quality with standard OOP principles (exception handling, multithreading safety/performance, file layout, documentation, etc.)
