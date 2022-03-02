@@ -11,4 +11,4 @@ Summary of Changes:
   - Implemented Pausing/Resuming functionality to better visualize temporary array
   - Implemented dual text/slider support for size input (but not for speed, since that isn't as important)
   - Improved synchronization for GUI and main thread
-  - Enhanced code quality with standard OOP principles
+  - Enhanced code quality with standard OOP principles (better exception handling, multithreading performance, file layout, documentation, etc.)
