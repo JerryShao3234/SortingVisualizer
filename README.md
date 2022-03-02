@@ -12,4 +12,5 @@ Summary of Current Modifications:
   - Implemented dual text/slider support for easier size input (but not for speed, since that isn't as important)
   - Implemented runtime modification support for speed
   - Improved synchronization between GUI sub-thread and main thread
+  - Modified sorting algorithm implementations
   - Enhanced code quality with standard OOP principles (exception handling, multithreading safety/performance, file layout, documentation, etc.)
