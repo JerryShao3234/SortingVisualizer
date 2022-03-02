@@ -5,6 +5,6 @@ In my copy, I made several changes to the GUI, increased functionality for the U
 
 
 Demo of my version:  
-![](src/SortingAnim.gif)  
+![](src/SortingAnim2.gif)  
 Todo:
   - ???

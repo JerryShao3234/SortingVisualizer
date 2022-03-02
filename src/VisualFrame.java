@@ -8,16 +8,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
+import static jdk.internal.org.jline.utils.Log.warn;
 
 public class VisualFrame extends JFrame {
 
@@ -35,9 +45,11 @@ public class VisualFrame extends JFrame {
     private JPanel wrapper;
     private JPanel arrayWrapper;
     private JPanel buttonWrapper;
+    private JPanel textWrapper;
     private JPanel[] squarePanels;
     private JButton start;
     private JButton pause;
+    private JFormattedTextField sizeip;
     private JComboBox<String> selection;
     private JSlider speed;
     private JSlider size;
@@ -56,11 +68,14 @@ public class VisualFrame extends JFrame {
         start = new JButton("Start");
         pause = new JButton("Pause");
         buttonWrapper = new JPanel();
+        textWrapper = new JPanel();
         arrayWrapper = new JPanel();
         wrapper = new JPanel();
         selection = new JComboBox<String>();
         speed = new JSlider(MIN_SPEED, MAX_SPEED, DEFAULT_SPEED);
         size = new JSlider(MIN_SIZE, MAX_SIZE, DEFAULT_SIZE);
+        sizeip = new JFormattedTextField();
+        JButton test = new JButton("test");
         speedVal = new JLabel("Speed: 20 ms");
         sizeVal = new JLabel("Size: 100 values");
         stepped = new JCheckBox("Incremental Values");
@@ -115,15 +130,26 @@ public class VisualFrame extends JFrame {
                 //validate();
                 SortingVisualizer.sortDataCount = size.getValue();
                 SortingVisualizer.resetArray();
+                sizeip.setText(Integer.toString(size.getValue()));
             }
         });
 
+        sizeip.setText("100");
+        sizeip.setColumns(3);
+        sizeip.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                SortingVisualizer.sortDataCount = Integer.parseInt(sizeip.getText());
+                SortingVisualizer.resetArray();
+                size.setValue(Integer.parseInt(sizeip.getText()));
+            }
+        });
 
         buttonWrapper.add(stepped);
         buttonWrapper.add(speedVal);
         buttonWrapper.add(speed);
         buttonWrapper.add(sizeVal);
         buttonWrapper.add(size);
+        buttonWrapper.add(sizeip);
         buttonWrapper.add(start);
         buttonWrapper.add(pause);
         buttonWrapper.add(selection);
