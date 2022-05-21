@@ -1,6 +1,6 @@
 # SortingVisualizer
 
-This is part of an open source project aimed at demonstrating different sorting algorithms to younger audiences. However, even as a university student studying computer engineering, sorting algorithms still remain a core part of understanding algorithm design. Thus, I have decided to contribute my own additions to this effort. The original project and its author can be found at https://github.com/Dadadah/sorting-visualization.  
+This is part of an open source project aimed at demonstrating different sorting algorithms to younger audiences. However, even as a university student studying computer engineering, sorting algorithms and their runtimes still remain a core part of the curriculum. Thus, I have decided to contribute my own additions to this effort. The original project and its author can be found at https://github.com/Dadadah/sorting-visualization.  
 In my copy, I made several changes to the GUI, increased functionality for the UX/ main thread interaction, added or reimplemented additional sorting algorithms, plus some other code structure and quality changes.  
 
 
